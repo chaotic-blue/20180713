@@ -19,7 +19,7 @@ public class employees {
 		int menu =5; //case 메뉴 선택
 		
 		while(true) {
-			System.out.println("menu 선택하세요. 1:전체조회(조건), 2:단건조회, 3:입력, 4:수정, 5:전체조회(map), 6:종료");
+			System.out.println("menu 선택하세요. 1:전체조회(조건), 2:단건조회, 3:입력, 4:수정, 5:전체조회(map), 6:종료, 7:프로시져 출력");
 			menu = sc.nextInt();
 
 		switch (menu) {
@@ -41,6 +41,10 @@ public class employees {
 		case 6:
 			System.out.println("프로그램을 종료합니다.");
 			System.exit(0);
+			break;
+		case 7:
+			emg.empListCursor();
+			break;
 		} //스위치문 닫기
 	} //while문 닫기
 		

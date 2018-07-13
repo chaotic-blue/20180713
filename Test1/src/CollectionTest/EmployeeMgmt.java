@@ -46,7 +46,8 @@ import java.util.Scanner;
 		dto.setLastName(lastName);
 		dto.setEmail(email);
 		dto.setJobId(job);
-		dao.insertEmp(dto);
+		//dao.insertEmp(dto);
+		dao.insertEmpProc(dto);
 		}
 		
 		public void updateEmpProc() { //4¹ø
@@ -67,7 +68,8 @@ import java.util.Scanner;
 			dto.setLastName(lastName);
 			dto.setEmail(email);
 			dto.setJobId(job);
-			dao.insertEmp(dto);
+			//dao.insertEmp(dto);
+			dao.updateEmpProc(dto);
 		}
 		
 		public void listMapEmpProc( ) {
@@ -75,5 +77,11 @@ import java.util.Scanner;
 		list1 = dao.getEmpListMap();
 		for(Map<String, Object> map : list1)
 			System.out.println(map);
+		}
+		
+		public void empListCursor() {
+			List<EmployeeDTO> list = dao.getEmpListCursor();
+			for(EmployeeDTO d : list)
+				System.out.println(d);
 		}
 }

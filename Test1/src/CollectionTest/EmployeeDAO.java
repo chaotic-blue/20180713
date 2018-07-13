@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +78,49 @@ public class EmployeeDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void insertEmpProc(EmployeeDTO dto) { // 인설트 프로시져 만들어서 사용하는 클라스
+		getConnection();
+		
+		try {
+			CallableStatement cstmt = conn.prepareCall("{call insert_emp_proc(?,?,?,?)}");
+			cstmt.setString(1, dto.getFirstName());//첫번째 ? 에 들어갈 프로시져
+			cstmt.setString(2, dto.getLastName());
+			cstmt.setString(3, dto.getEmail());
+			cstmt.setString(4, dto.getJobId());
+			int r = cstmt.executeUpdate();
+			System.out.println(r+"건 입력되었습니다.(Proc)");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
 
+	public void updateEmpProc(EmployeeDTO dto) { // 업데이트 프로시져 만들어서 사용하는 클라스
+		
+		getConnection();
+		
+		try {
+			CallableStatement pstmt = conn.prepareCall("{call update_emp_proc(?,?,?,?,?)}");
+			
+			pstmt.setString(1, dto.getFirstName());
+			pstmt.setString(2, dto.getLastName());
+			pstmt.setString(3, dto.getEmail());
+			pstmt.setString(4, dto.getJobId());
+			pstmt.setString(5, dto.getEmployeeId());
+			int cnt = pstmt.executeUpdate();
+			System.out.println(cnt + " 건이 입력되었습니다.");
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	public EmployeeDTO getEmpDTO(String emp_id) {
 
 		getConnection();
@@ -188,18 +230,35 @@ public class EmployeeDAO {
 		return list;
 	}
 
-	/*public void getEmpListCursor() { //프로시져 사용
+	public List<EmployeeDTO> getEmpListCursor() { //프로시져 사용
 		getConnection();//연결함
+		List<EmployeeDTO> list = new ArrayList<>();
+		EmployeeDTO dto = null;
+		
 		try {
 			CallableStatement cstmt = conn.prepareCall("{call get_emplist_proc(?,?,?)}");
 			cstmt.setInt(1, 500);
 			cstmt.setDate(2, new Date(100,0,1));
-			cstmt.registerOutParameter(3, oracle.jdbc.OracleType.CURSOR);
+			cstmt.registerOutParameter(3, oracle.jdbc.OracleTypes.CURSOR);
 			cstmt.executeQuery();
-			ResultSet rs = cstmt.getObject(3);
+			ResultSet rs = (ResultSet) cstmt.getObject(3);
+			
+			while(rs.next()) {
+				dto = new EmployeeDTO();
+				dto.setEmployeeId(rs.getString("employee_id"));
+				dto.setFirstName(rs.getString("first_name"));
+				dto.setLastName(rs.getString("last_name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setJobId(rs.getString("job_id"));
+				dto.setHireDate(rs.getString("hire_date"));
+				list.add(dto); //dto한건 담음.. while문으로 계속 돔
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}*/
+		return list;
+	}
+	
+	
 }

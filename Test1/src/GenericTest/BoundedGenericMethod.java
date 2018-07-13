@@ -1,4 +1,4 @@
-//505페이지 예제 참조.. 
+//505페이지 예제 참조.. dasdasd
 
 package GenericTest;
 

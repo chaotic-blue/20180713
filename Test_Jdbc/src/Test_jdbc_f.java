@@ -12,7 +12,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class Test_jdbc_final extends JFrame implements ItemListener{
+public class Test_jdbc_f extends JFrame implements ItemListener{
 	private JRadioButton rb1, rb2, rb3; //전체,남,여
 	private JTextArea txtResult = new JTextArea();
 	
@@ -22,7 +22,7 @@ public class Test_jdbc_final extends JFrame implements ItemListener{
 	
 	private String sex;
 	
-	public Test_jdbc_final() {
+	public Test_jdbc_f() {
 		setTitle("사원현황");
 		
 		layInit();
@@ -85,7 +85,7 @@ public class Test_jdbc_final extends JFrame implements ItemListener{
 	
 	private String showdata(String sex) {
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/abc", "root", "autoset");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/firsttest", "root", "autoset"); //생성한 테이블 명 입력해준다..
 			stmt = conn.createStatement();
 			
 			String sql = "select id, name, sex"
@@ -104,12 +104,9 @@ public class Test_jdbc_final extends JFrame implements ItemListener{
 				String str = rs.getString("id") + "\t" + rs.getString("name") + "\t" + rs.getString("sex") + "\n";
 				txtResult.append(str);
 			}
-		} 
-		
-		catch (Exception e2) {
+		} catch (Exception e2) {
 			System.out.println("actionPerformed err : " + e2);
 		} finally {						// 작업이 끝나면 닫아주어야 한다
-			
 			try {
 				if(rs != null) rs.close();
 				if(stmt != null) stmt.close();
@@ -121,7 +118,7 @@ public class Test_jdbc_final extends JFrame implements ItemListener{
 		return sex;
 	}
 	public static void main(String[] args) {
-		new Test_jdbc_final();
+		new Test_jdbc_f();
 	}
 }
 

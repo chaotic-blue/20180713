@@ -1,4 +1,4 @@
-package ch1_Start; //dfadsf
+package ch1_Start;
 
 
 public class HelloWorld {

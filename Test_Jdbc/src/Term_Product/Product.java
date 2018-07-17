@@ -36,19 +36,23 @@ public class Product {
 		case 3: //데이터 입력 해주는부분
 			emg.insertEmpProc();
 			break;
+		/*
 		case 4:
 			emg.updateEmpProc();
 			break;
 		case 5:
 			emg.listMapEmpProc();
 			break;
+			*/
 		case 6:
 			System.out.println("프로그램을 종료합니다.");
 			System.exit(0);
 			break;
+			/*
 		case 7:
 			emg.empListCursor();
 			break;
+			*/
 		} //스위치문 닫기
 	} //while문 닫기
 		

@@ -37,11 +37,11 @@ public class ProductDAO {
 	}
 
 
-	public Connection getConnection() {
+	public Connection getConnection() { //DB立加何盒 皋家靛
 
 		try {
-			String user = "hr"; 
-			String pw = "hr";
+			String user = "java"; 
+			String pw = "java";
 			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 
 			Class.forName("oracle.jdbc.driver.OracleDriver");        
@@ -62,8 +62,7 @@ public class ProductDAO {
 
 	public void insertEmp(ProductDTO dto) {
 		getConnection();
-		String sql = "insert into employees (employee_id, first_name, last_name, email, hire_date, job_id) " + 
-				"values(?, ?, ?, ?,sysdate, ?)";
+		String sql = "insert into io_info (IO_KEY.nextval, product_key, in_out, warehouse) " + "values(?, ?, ?, ?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getEmployeeId());

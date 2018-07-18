@@ -10,6 +10,21 @@ public class EmployeeDTO {
 	//private항목 정의 후 소스 개터세터, toString 오버라이드 해줌
 	private String JobId;
 	private String HireDate;
+	private int salary;
+
+	public int getSalary() {
+		return salary;
+	}
+
+
+
+
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+
+
+
 
 	public String getEmployeeId() {
 		return employeeId;
@@ -96,7 +111,7 @@ public class EmployeeDTO {
 	@Override
 	public String toString() {
 		Formatter fm = new Formatter();
-		String result = fm.format("%9s\t %-10s\t %-10s\t %-15s\t %-10s\t %-10s", employeeId, firstName, lastName, email, JobId, HireDate).toString();
+		String result = fm.format("%9s\t %-10s\t %-10s\t %-15s\t %-10s\t %-10s", employeeId, firstName, lastName, salary, JobId, HireDate).toString();
 		//return "EmployeeDTO [employeeId=" + employeeId + ", firstName=" + firstName + ", lastName=" + lastName
 				//+ ", email=" + email + "]";
 		return result;

@@ -1,6 +1,8 @@
 package CollectionTest;
 
 import java.awt.Transparency;
+import java.io.File;
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,6 +14,16 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import jxl.Workbook;
+import jxl.format.Alignment;
+import jxl.format.Colour;
+import jxl.write.Label;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 
 public class EmployeeDAO {
 
@@ -162,11 +174,16 @@ public class EmployeeDAO {
 		String whereClause = "where 1=1";
 
 
-		if(vo.getSearchCondition().equals("first_name"))
+		if("first_name".equals(vo.getSearchCondition()))
 			whereClause += " and first_name like '%'||'"+vo.getSearchKeyword()+"'||'%'";
 
-		if(vo.getSearchCondition().equals("hire_date"))
-			whereClause += " and hire_date > to_date('" + vo.getSearchKeyword() + "','rrrrmmdd')";
+		if("last_name".equals(vo.getSearchCondition()))
+			whereClause += " and last_name like '%'||'"+vo.getSearchKeyword()+"'||'%'";
+		
+		if("salary".equals(vo.getSearchCondition()))
+			whereClause += " and salary like '%'||'"+vo.getSearchKeyword()+"'||'%'";
+		
+//			whereClause += " and hire_date > to_date('" + vo.getSearchKeyword() + "','rrrrmmdd')";
 
 		String sql = "select employee_id, first_name, last_name, email, job_id, hire_date from employees "
 				+ whereClause + " order by 1 desc";
@@ -258,6 +275,48 @@ public class EmployeeDAO {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	
+	
+	public void excelExport() throws IOException, WriteException {
+		
+		
+		EmployeeDAO dao = new EmployeeDAO();
+		WritableWorkbook workbook = Workbook.createWorkbook(new File("newExcel.xls")); //¿¢¼¿ ¿öÅ©ºÏ ¸¸µë
+		WritableSheet sheet = workbook.createSheet("employee", 0); //¿¢¼¿ ½ÃÆ® ¸¸µë
+		WritableCellFormat wcf = new WritableCellFormat();
+		wcf.setAlignment(Alignment.CENTRE);//¼¿ Çü½Ä ²Ù¹Ì´Â°Íµé
+		wcf.setBackground(Colour.GOLD);
+		WritableFont arial10Bold = new WritableFont(WritableFont.ARIAL, 10, WritableFont.BOLD);
+		wcf.setFont(arial10Bold);
+		sheet.setColumnView(0, 20); //¼¿ ÄÃ·³ ³ÐÀÌ ÁöÁ¤ 
+		sheet.setColumnView(1, 20);
+		sheet.setColumnView(2, 20);
+
+		sheet.addCell(new Label(0, 0, "firstName", wcf)); //¼¿À» ¸¸µë firstname ~ salary
+		sheet.addCell(new Label(1, 0, "lastName", wcf));
+		sheet.addCell(new Label(2, 0, "salary", wcf));
+		
+		searchVO vo = new searchVO();
+		List<EmployeeDTO> list = dao.getEmpList(vo);
+		//List<EmployeeDTO> list = null;//dao.getEmployeesList();
+		
+		
+		int j = 1;
+		for (EmployeeDTO emp : list) { //µ¥ÀÌÅÍ°¡ µ¹¸é¼­ ´ã±ä´Ù.
+			Label lblFirstName = new Label(0, j, emp.getFirstName());
+			Label lblLastName = new Label(1, j, emp.getLastName());
+			Label lblSalary = new Label(2, j, emp.getSalary());
+
+			sheet.addCell(lblFirstName);
+			sheet.addCell(lblLastName);
+			sheet.addCell(lblSalary);
+			j++;
+		}
+		workbook.write();
+		workbook.close();
+		System.out.println("excel completed.");
 	}
 	
 	

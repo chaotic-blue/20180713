@@ -1,12 +1,13 @@
 package Term_Product;
 
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-//import Term_Product.ProductMgmt;
+import Term_Product.ProductMgmt;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
@@ -23,7 +24,7 @@ public class Product {
 		int menu =5; //case 메뉴 선택
 		
 		while(true) {
-			System.out.println("menu 선택하세요. 1:전체조회(조건), 2:단건조회, 3:입력, 4:수정, 5:전체조회(map), 6:종료, 7:프로시져 출력");
+			System.out.println("menu 선택하세요. 1:상품정보, 2:입출고정보, 3:재고정보, 4:창고정보, 6:종료");
 			menu = sc.nextInt();
 
 		switch (menu) {

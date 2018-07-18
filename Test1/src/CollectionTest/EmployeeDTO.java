@@ -10,16 +10,14 @@ public class EmployeeDTO {
 	//private항목 정의 후 소스 개터세터, toString 오버라이드 해줌
 	private String JobId;
 	private String HireDate;
-	private int salary;
+	private String salary;
 
-	public int getSalary() {
+	public String getSalary() {
 		return salary;
 	}
 
 
-
-
-	public void setSalary(int salary) {
+	public void setSalary(String salary) {
 		this.salary = salary;
 	}
 

@@ -1,11 +1,14 @@
 package CollectionTest;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-	public class EmployeeMgmt {
+import jxl.write.WriteException;
+
+	public class EmployeeMgmt { //메인부분을 간단하게 하기위해 여기에 나눠서 작성해놈
 		
 		EmployeeDAO dao = new EmployeeDAO();
 		Scanner sc = new Scanner(System.in);
@@ -83,5 +86,11 @@ import java.util.Scanner;
 			List<EmployeeDTO> list = dao.getEmpListCursor();
 			for(EmployeeDTO d : list)
 				System.out.println(d);
+		}
+		
+		public void excelExport() throws WriteException, IOException {
+			dao.excelExport();
+			
+			
 		}
 }

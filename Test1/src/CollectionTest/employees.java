@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import jxl.write.WriteException;
+
 import java.sql.DriverManager;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class employees {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws WriteException, IOException {
 		//EmployeeDAO dao = new EmployeeDAO();
 		EmployeeMgmt emg = new EmployeeMgmt();
 		//EmployeeDTO dto = new EmployeeDTO();
@@ -45,8 +49,12 @@ public class employees {
 		case 7:
 			emg.empListCursor();
 			break;
+		case 8:
+			emg.excelExport();
+			break;
 		} //½ºÀ§Ä¡¹® ´Ý±â
 	} //while¹® ´Ý±â
+		
 		
 		/*EmployeeDTO dto = dao.getEmpDTO("113");
 		System.out.println(dto);*/

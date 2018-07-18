@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/Sample/jxl-2.6.12.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Program%20Files/Java/jre1.8.0_172/lib/ext/jxl-2.6.12.jar</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

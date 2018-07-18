@@ -1,5 +1,6 @@
 package Sample;
 
+//import java.util.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,6 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CollectionTest.EmployeeDTO;
+
+import java.io.File;
+import java.io.IOException;
+
+import jxl.Workbook;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+
+
 
 public class sample2 {
 	public static void main(String[] args) {
@@ -59,6 +70,14 @@ public class sample2 {
 		} //sql연결준비
 		
 		list.stream().filter(n-> n.getSalary()>700).forEach(s-> System.out.println(s)); //salary 700보다 큰 사람들 출력
-		
 	}
+	/*
+	public void excelExport() throws IOException {
+		
+		WritableWorkbook workbook = Workbook.createWorkbook(new File("newExcel.xls"));
+		WritableSheet sheet = workbook.createSheet("employee", 0);
+		WritableCellFormat wcf = new WritableCellFormat();
+		wcf.setAlignment();
+	}
+	*/
 }

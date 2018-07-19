@@ -31,7 +31,7 @@ public class EmployeeDAO {
 	public void updateEmp(EmployeeDTO dto) {
 		getConnection();
 		String sql = "update employees " + 
-				"SET employee_id=?, first_name=?, last_name=?, email=? " + 
+				"SET employee_id=?, first_name=?, last_name=?, email=?, Job_id=? " + 
 				"where employee_id = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -39,7 +39,7 @@ public class EmployeeDAO {
 			pstmt.setString(2, dto.getFirstName());
 			pstmt.setString(3, dto.getLastName());
 			pstmt.setString(4, dto.getEmail());
-			pstmt.setString(5, dto.getEmployeeId());
+			pstmt.setString(5, dto.getJobId());
 			int cnt = pstmt.executeUpdate();
 			System.out.println(cnt + " 건이 입력되었습니다.");
 		}
@@ -203,6 +203,8 @@ public class EmployeeDAO {
 				dto.setFirstName(rs.getString("first_name"));
 				dto.setLastName(rs.getString("last_name"));
 				dto.setEmail(rs.getString("email"));
+				dto.setJobId(rs.getString("job_id"));
+				dto.setHireDate(rs.getString("hire_date"));
 				list.add(dto); //dto한건 담음.. while문으로 계속 돔
 
 			}

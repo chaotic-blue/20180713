@@ -23,7 +23,7 @@ public class employees {
 		int menu =5; //case 메뉴 선택
 		
 		while(true) {
-			System.out.println("menu 선택하세요. 1:전체조회(조건), 2:단건조회, 3:입력, 4:수정, 5:전체조회(map), 6:종료, 7:프로시져 출력");
+			System.out.println("menu 선택하세요. 1:Employee 전체조회, 6:종료");
 			menu = sc.nextInt();
 
 		switch (menu) {
@@ -61,7 +61,9 @@ public class employees {
 		
 		/*List<EmployeeDTO> list = dao.getEmpList();
 		for(EmployeeDTO dto : list)
-			System.out.println(dto);*/
+			System.out.println(dto);
+			"menu 선택하세요. 1:전체조회(조건), 2:단건조회, 3:입력, 4:수정, 5:전체조회(map), 6:종료, 7:프로시져 출력"
+			*/
 		
 		
 		}
